@@ -18,7 +18,8 @@ def detail_url(recipe_id):
     """Return recipe detail URL /api/recipe/recipes/id"""
     return reverse('recipe:recipe-detail', args=[recipe_id])
 
-def sampel_tag(user, name='Main course'):
+
+def sample_tag(user, name='Main course'):
     """Create and return a smaple tag"""
     return Tag.objects.create(user=user, name=name)
 
@@ -97,7 +98,7 @@ class PrivateRecipeApiTests(TestCase):
         """Test viewing a recipe detail"""
         recipe = sample_recipe(user=self.user)
         recipe.tags.add(sample_tag(user=self.user))
-        recipe.ingredient.add(sample_ingredient(user=self.user))
+        recipe.ingredients.add(sample_ingredient(user=self.user))
 
         url = detail_url(recipe.id)
         res = self.client.get(url)
